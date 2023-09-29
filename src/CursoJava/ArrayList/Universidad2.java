@@ -1,23 +1,13 @@
-package CursoJava.ArrayList03;
+package CursoJava.ArrayList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**Para el desarrollo del programa del examen
- Herencia
- Sobreescritura de métodos
- ArrayLIst de objetos.
- Editar, agregar y eliminar un elemento del array
- getters y setter
- toString
- */
-// Clase Persona, que actúa como superclase para las clases Estudiante y Profesor
-class Persona {
+class People {
     private String nombre;
     private String apellido;
     private String dni;
 
-    // Constructor para inicializar los campos de la clase Persona
-    public Persona(String nombre, String apellido, String dni) {
+    public People(String nombre, String apellido, String dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -54,11 +44,11 @@ class Persona {
 }
 
 // Clase Estudiante, que hereda de la clase Persona e introduce un nuevo campo legajo
-class Estudiante extends Persona {
+class Studient extends People {
     private String legajo;
 
     // Constructor para inicializar los campos de la clase Estudiante
-    public Estudiante(String nombre, String apellido, String dni, String legajo) {
+    public Studient(String nombre, String apellido, String dni, String legajo) {
         super(nombre, apellido, dni);
         this.legajo = legajo;
     }
@@ -79,11 +69,11 @@ class Estudiante extends Persona {
 }
 
 // Clase Profesor, que hereda de la clase Persona e introduce un nuevo campo montoSueldo
-class Profesor extends Persona {
+class Teacher extends People {
     private double montoSueldo;
 
     // Constructor para inicializar los campos de la clase Profesor
-    public Profesor(String nombre, String apellido, String dni, double montoSueldo) {
+    public Teacher(String nombre, String apellido, String dni, double montoSueldo) {
         super(nombre, apellido, dni);
         this.montoSueldo = montoSueldo;
     }
@@ -96,22 +86,22 @@ class Profesor extends Persona {
 }
 
 // Clase Curso, que contiene un ArrayList de estudiantes y un objeto de la clase Profesor
-class Curso {
-    ArrayList<Estudiante> estudiantes;
-    Profesor profesor;
+class ClassRoom {
+    ArrayList<Studient> estudiantes;
+    Teacher profesor;
 
     // Constructor para inicializar los campos de la clase Curso
-    public Curso() {
-        estudiantes = new ArrayList<Estudiante>();
+    public ClassRoom() {
+        estudiantes = new ArrayList<Studient>();
     }
 
     // Método para establecer el profesor del curso
-    public void setProfesor(Profesor profesor) {
+    public void setProfesor(Teacher profesor) {
         this.profesor = profesor;
     }
 
     // Método para agregar un estudiante al curso
-    public void agregarEstudiante(Estudiante estudiante) {
+    public void agregarEstudiante(Studient estudiante) {
         estudiantes.add(estudiante);
     }
 
@@ -127,7 +117,7 @@ class Curso {
 
     // Método para editar los detalles de un estudiante
     public void editarEstudiante(String dni, String nuevoNombre, String nuevoApellido, String nuevoLegajo) {
-        for (Estudiante estudiante : estudiantes) {
+        for (Studient estudiante : estudiantes) {
             if (estudiante.getDni().equals(dni)) {
                 estudiante.setNombre(nuevoNombre);
                 estudiante.setApellido(nuevoApellido);
@@ -138,19 +128,21 @@ class Curso {
 
     public String toString() {
         String detalles = "Profesor: " + profesor + "\nEstudiantes:\n";
-        for (Estudiante estudiante : estudiantes) {
+        for (Studient estudiante : estudiantes) {
             detalles += estudiante + "\n";
         }
         return detalles;
     }
+
+
 }
 
 // Clases Persona, Estudiante, Profesor, y Curso son las mismas
 
-class Main {
+class Principal {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Curso curso = new Curso();
+        ClassRoom curso = new ClassRoom();
 
         while (true) {
             System.out.println("1. Asignar profesor al curso\n2. Agregar estudiante al curso\n3. Editar estudiante\n4. Eliminar estudiante\n5. Mostrar detalles del curso\n6. Salir");
@@ -168,7 +160,7 @@ class Main {
                     System.out.print("Ingrese sueldo del profesor: ");
                     double montoSueldo = scanner.nextDouble();
 
-                    Profesor profesor = new Profesor(nombreProfesor, apellidoProfesor, dniProfesor, montoSueldo);
+                    Teacher profesor = new Teacher(nombreProfesor, apellidoProfesor, dniProfesor, montoSueldo);
                     curso.setProfesor(profesor);
                     break;
                 case 2:
@@ -181,7 +173,7 @@ class Main {
                     System.out.print("Ingrese legajo del estudiante: ");
                     String legajo = scanner.next();
 
-                    Estudiante estudiante = new Estudiante(nombreEstudiante, apellidoEstudiante, dniEstudiante, legajo);
+                    Studient estudiante = new Studient(nombreEstudiante, apellidoEstudiante, dniEstudiante, legajo);
                     curso.agregarEstudiante(estudiante);
                     break;
                 case 3:
